@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
-import memesData from "../memesData";
+import { useEffect } from "react";
 
 
 export default function Meme(){
@@ -11,18 +11,27 @@ export default function Meme(){
         }
      
     )
-    const[allMemeImages, setAllMemeImages] = useState(memesData)
-    
+    const[allMemes, setAllMemes] = useState([])
+
+    useEffect(()=>{
+        fetch("https://api.imgflip.com/get_memes")// api url
+        .then(res=>res.json())
+        .then(data=>setAllMemes(data.data.memes))
+   
+    }, [])
+
+  
     function getMemeImage(){
-        const memesArray = allMemeImages.data.memes
-        const randomNumber = Math.floor(Math.random() * memesArray.length)
-         const url = memesArray[randomNumber].url
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+         const url = allMemes[randomNumber].url
 
         //save the random url in state
         setMeme(prevMeme =>({
             ...prevMeme,
             randomImage : url
         }))
+
+
     }
 
     
@@ -68,6 +77,7 @@ export default function Meme(){
         </div>
 
         <div className="meme">
+        <pre>{JSON.stringify(setAllMemes,null,2)}</pre>
         <img src={meme.randomImage} alt="meme--image" className="meme--image"/>
         <h3 className="top--text">{meme.topText}</h3>
         <h3 className="bottom--text">{meme.bottomText}</h3>

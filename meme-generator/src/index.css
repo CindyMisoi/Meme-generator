@@ -88,14 +88,12 @@ h3{
   line-height: 39px;
   
   /* identical to box height */
-  
+  text-transform: uppercase;
   color: #e9dbdb;
-  text-shadow: #D5D4D8;
   
-
+  
 }
 .bottom--text{
-  width: 255px;
   height: 39px;
   left: 213px;
   top: 440px;
@@ -107,8 +105,7 @@ h3{
   line-height: 39px;
   
   /* identical to box height */
-  text-align: center;
-  
+  text-transform: uppercase;
   color: #e9dbdb;
  
  
